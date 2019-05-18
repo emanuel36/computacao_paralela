@@ -1,4 +1,4 @@
-CC = gcc
+CC = mpicc
 INC = -I./inc
 
 all: main
