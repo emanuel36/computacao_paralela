@@ -32,15 +32,12 @@ int main(int argc, char** argv){
 		if(z <= 1) countLocal++;
 	}
 
-	if(rank == 0){
-		MPI_Reduce(&countLocal, &count, 1, MPI_INT, MPI_SUM, 0, MPI_COMM_WORLD);
+	MPI_Reduce(&countLocal, &count, 1, MPI_INT, MPI_SUM, 0, MPI_COMM_WORLD);
 
+	if(rank == 0){
 		pi=(double)count/n*4;
    		printf("PI: %g\n", pi);
-
-	}else{   
-		MPI_Reduce(&countLocal, &count, 1, MPI_INT, MPI_SUM, 0, MPI_COMM_WORLD);
-	}
+   	}
 
 	MPI_Finalize();
 }
