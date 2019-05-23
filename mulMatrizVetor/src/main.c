@@ -77,6 +77,10 @@ int main(int argc, char *argv[]) {
 		int tamanhoResultado = numLinhas;
 		float vetorResultado[tamanhoResultado];
 
+		for(int i = 0; i < tamanhoResultado; i++){
+			vetorResultado[i] = 0.0;
+		}
+
 		for(int i = 0; i < tamanhoResultado; i++)	vetorResultado[i] = 0;
 
 		for(int i = 0; i < procLocal; i++){
@@ -149,6 +153,10 @@ int main(int argc, char *argv[]) {
 		//Realiza cálculo local
 		int tamanhoResultadoLocal = procLocal;
 		float vetorResultadoLocal[tamanhoResultadoLocal];
+
+		for(int i = 0; i < tamanhoResultadoLocal; i++){
+			vetorResultadoLocal[i] = 0.0;
+		}
 
 		for(int i = 0; i < procLocal; i++){
 			for(int j = 0; j < numColunas; j++){
