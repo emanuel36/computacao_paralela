@@ -27,12 +27,13 @@ int main(int argc, char *argv[]) {
 		Matriz matrizAux = lerMatriz(arquivoMatriz);
 		Matriz vetorAux = lerMatriz(arquivoVetor);
 
-		//salvando matriz e vetor na memória
-		float *vetor = vetorAux.data;
-		int numLinhas, numColunas;
+		//salvando matriz e vetor na memória 
+		int numLinhas, numColunas, tamanhoVetor;
+		tamanhoVetor = vetorAux.n;
 		numLinhas = matrizAux.n;
 		numColunas = matrizAux.m;
 		float matriz[numLinhas][numColunas];
+		float *vetor = (float *) malloc(tamanhoVetor * sizeof(float));
 
 		for(int i = 0; i < numLinhas; i++){
 			for(int j = 0; j < numColunas; j++){
@@ -40,15 +41,19 @@ int main(int argc, char *argv[]) {
 			}
 		}
 
+		for(int i = 0; i < tamanhoVetor; i++){
+			vetor[i] = vetorAux.data[i];
+		}
+
 		//Enviando tamanho do vetor para os processos
 		for(int i = 1; i < numtasks; i++){
-			MPI_Send(&vetorAux.n, 1, MPI_INT, i, 0, MPI_COMM_WORLD);
+			MPI_Send(&tamanhoVetor, 1, MPI_INT, i, 0, MPI_COMM_WORLD);
 		}
 
 		//Enviando o vetor para os processos
-		for(int i = 0; i < numtasks; i++){
-			MPI_Send(vetorAux.data, vetorAux.n, MPI_FLOAT, i, 0, MPI_COMM_WORLD);
-		}
+		for(int i = 1; i < numtasks; i++){
+			MPI_Send(vetor, tamanhoVetor, MPI_FLOAT, i, 0, MPI_COMM_WORLD);
+		}		
 
 		//Calculando quantidade de trabalho local
 		int procLocal = matrizAux.n/numtasks;
@@ -134,6 +139,7 @@ int main(int argc, char *argv[]) {
 		//Recebendo vetores
 		float *vetor = (float *) malloc(tamanhoVetor * sizeof(float)); 
 		MPI_Recv(vetor, tamanhoVetor, MPI_FLOAT, 0, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
+
 
 		//Recebendo processamento local
 		int procLocal;
