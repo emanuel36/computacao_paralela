@@ -4,10 +4,10 @@ INC = -I./inc
 all: main
 
 main: folder matriz.o main.o
-	$(CC) obj/matriz.o obj/main.o -o app.bin
+	$(CC) -fopenmp obj/matriz.o obj/main.o -o app.bin
 
 main.o: 
-	$(CC) -o main.c -c $(INC) src/main.c -o obj/main.o
+	$(CC) -fopenmp -o main.c -c $(INC) src/main.c -o obj/main.o
 
 matriz.o: 
 	$(CC) -o matriz.c -c $(INC) src/matriz.c -o obj/matriz.o
