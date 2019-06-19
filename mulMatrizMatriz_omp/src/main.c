@@ -24,16 +24,16 @@ int main(int argc, char *argv[]) {
 
 	numLinhas1 = matriz1Aux.n;
 	numColunas1 = matriz1Aux.m;
-	float **matriz1 = (float **) malloc(numLinhas1 * sizeof(float *)); 
+	double **matriz1 = (double **) malloc(numLinhas1 * sizeof(double *)); 
 	for (int i = 0; i < numLinhas1; i++){
-		matriz1[i] = (float *) malloc(numColunas1 * sizeof(float)); 
+		matriz1[i] = (double *) malloc(numColunas1 * sizeof(double)); 
 	}
 
 	numLinhas2 = matriz2Aux.n;
 	numColunas2 = matriz2Aux.m;
-	float **matriz2 = (float **) malloc(numLinhas2 * sizeof(float *)); 
+	double **matriz2 = (double **) malloc(numLinhas2 * sizeof(double *)); 
 	for (int i = 0; i < numLinhas2; i++){
-		matriz2[i] = (float *) malloc(numColunas2 * sizeof(float)); 
+		matriz2[i] = (double *) malloc(numColunas2 * sizeof(double)); 
 	}
 
 	if(numColunas2 != numLinhas1){
@@ -56,9 +56,9 @@ int main(int argc, char *argv[]) {
 	int numLinhas3 = numColunas1;
 	int numColunas3 = numLinhas2;
 
-	float **matrizResultado = (float **) malloc(numLinhas3 * sizeof(float *)); 
+	double **matrizResultado = (double **) malloc(numLinhas3 * sizeof(double *)); 
 	for (int i = 0; i < numLinhas3; i++){
-		matrizResultado[i] = (float *) malloc(numColunas3 * sizeof(float)); 
+		matrizResultado[i] = (double *) malloc(numColunas3 * sizeof(double)); 
 	}
 
 	for(int i = 0; i < numLinhas3; i++){
