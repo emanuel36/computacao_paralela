@@ -22,8 +22,6 @@ int main(int argc, char *argv[]) {
 	double x;
 	int i;
 
-	int numThreads = omp_get_num_threads;
-
 	a = atof(argv[1]);
 	b = atof(argv[2]);
 	n = atoi(argv[3]);
@@ -33,6 +31,7 @@ int main(int argc, char *argv[]) {
 
 	#pragma omp parallel shared(a,b,n,h) private(x,i) reduction(+:integral)
 	{
+		int numThreads = omp_get_num_threads;
 		int threadNum = omp_get_thread_num;
 		x = (((b - a) / numThreads) * threadNum) + a;
 		for (i = 0; i < (n/numThreads); i++) {
